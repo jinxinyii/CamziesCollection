@@ -1,0 +1,107 @@
+﻿@page
+@model CapstoneCC.Pages.StaffModel
+@{
+    Layout = null;
+    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Staff Management";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camzie's Collections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="~/css/staff.css" />
+</head>
+<body>
+    <div class="sidebar">
+        <img src="~/images/WHITE_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" style="width: 70%; display: block; margin: 0 auto 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            @if (User.IsInRole("customer") || User.IsInRole("reseller"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/AddToCart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+            }
+            @if (User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/POS"><i class="fas fa-cash-register"></i> Point-of-Sale</a>
+                </li>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Orders"><i class="fas fa-clipboard-list"></i> Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Sales"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Staff"><i class="fas fa-user"></i> Staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                </li>
+            }
+            <li class="nav-item">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2 class="staff-management-header">STAFF MANAGEMENT</h2>
+        <div class="staff-management-table-container">
+            <table id="staffTable" class="staff-management-table display">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <form method="post" asp-page-handler="ChangeRole">
+                                    <input type="hidden" name="UserId" value="@user.Id" />
+                                    <select name="Role" class="form-control">
+                                        <option value="admin" selected="@((Model.UserRoles.ContainsKey(user.Id) && Model.UserRoles[user.Id].Contains("admin")))">Admin</option>
+                                        <option value="staff" selected="@((Model.UserRoles.ContainsKey(user.Id) && Model.UserRoles[user.Id].Contains("staff")))">Staff</option>
+                                        <option value="reseller" selected="@((Model.UserRoles.ContainsKey(user.Id) && Model.UserRoles[user.Id].Contains("reseller")))">Reseller</option>
+                                        <option value="customer" selected="@((Model.UserRoles.ContainsKey(user.Id) && Model.UserRoles[user.Id].Contains("customer")))">Customer</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Change Role</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/staff.js" asp-append-version="true"></script>
+</body>
+</html>

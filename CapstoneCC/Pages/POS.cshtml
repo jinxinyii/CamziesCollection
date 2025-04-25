@@ -1,0 +1,121 @@
+﻿@page
+@model CapstoneCC.Pages.POSModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+<input type="hidden" id="RequestVerificationToken" value="@Xsrf.GetAndStoreTokens(HttpContext).RequestToken" />
+@{
+    Layout = null;
+    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Point of Sale";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camzie's Collections - POS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/pos.css" asp-append-version="true" />
+    <div id="clock-container">
+        <span id="clock"></span>
+    </div>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="~/images/WHITE_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" style="width: 70%; display: block; margin: 0 auto 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            @if (User.IsInRole("customer") || User.IsInRole("reseller"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/AddToCart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+            }
+            @if (User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/POS"><i class="fas fa-cash-register"></i> Point-of-Sale</a>
+                </li>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Orders"><i class="fas fa-clipboard-list"></i> Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Sales"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Staff"><i class="fas fa-user"></i> Staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                </li>
+            }
+            <li class="nav-item">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <div class="logo-container">
+            <img src="~/images/PINK_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" class="logo" style="width: 30%; display: block; margin: 0 auto 20px;" />
+        </div>
+
+        <div style="position: relative;">
+            <input type="text" id="barcodeInput" placeholder="Scan or Enter Barcode or Product Name" oninput="showSuggestions()" autocomplete="off" />
+            <div id="suggestionBox" class="suggestions"></div>
+        </div>
+        <button onclick="addToCart()">Add to Cart</button>
+
+        <h2>Cart</h2>
+        <div class="cart-table-container">
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Barcode</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Grand Total:</strong> <span id="grandTotal">0.00</span></p>
+
+        <button onclick="openCheckoutModal()">Checkout</button>
+        <div id="checkoutModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCheckoutModal()">&times;</span>
+                <h2>Receipt</h2>
+                <div id="receiptContent">
+                </div>
+                <button onclick="printReceipt()">Print</button>
+                <button id="checkoutButton" onclick="confirmCheckout()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const productData = @Html.Raw(Json.Serialize(Model.Products));
+        const cashierName = "@Model.CashierName";
+    </script>
+    <script src="~/js/pos.js" asp-append-version="true"></script>
+</body>
+</html>

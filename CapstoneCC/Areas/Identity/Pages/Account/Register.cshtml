@@ -1,0 +1,140 @@
+﻿@page
+@model RegisterModel
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        Response.Redirect("/Home");
+    }
+    ViewData["Title"] = "Sign Up";
+}
+
+
+<div class="row">
+    <div class="col-lg-6 mx-auto custom-container">
+        <h2 class="text-center mb-3" style="color: #EC1EA4;">SIGN UP</h2>
+        <hr style="color: #EC1EA4; border: 1.5px solid;" />
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+        <div class="d-flex justify-content-center mb-3 role-buttons" style="color: #EC1EA4;">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       name="role"
+                       id="customer-btn"
+                       value="customer"
+                       checked
+                       onclick="setRole('customer')" />
+                <label class="form-check-label" for="customer-btn">CUSTOMERS</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       name="role"
+                       id="reseller-btn"
+                       value="reseller"
+                       onclick="setRole('reseller')" />
+                <label class="form-check-label" for="reseller-btn">RESELLERS</label>
+            </div>
+        </div>
+
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <input type="hidden" asp-for="Input.Role" id="roleInput" value="customer" />
+
+            <!-- First Name -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">First Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.FirstName" pattern="[A-Za-z\s]+" title="First name must contain letters only." required>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Last Name</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.LastName" pattern="[A-Za-z\s]+" title="Last name must contain letters only." required>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Email</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.Email" type="email" required>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Phone Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.PhoneNumber" pattern="\d+" title="Phone number must contain digits only." required>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Address</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.Address" required>
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Password</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.Password" type="password" required>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="row mb-3">
+                <label class="col-sm-4 col-form-label custom-label">Confirm Password</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="Input.ConfirmPassword" type="password" required>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row mb-3">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-outline-primary">SIGN UP</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" href="/" role="button">CANCEL</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    function setRole(role) {
+        document.getElementById('roleInput').value = role;
+        document.getElementById('reseller-btn').classList.remove('active');
+        document.getElementById('customer-btn').classList.remove('active');
+
+        if (role === 'reseller') {
+            document.getElementById('reseller-btn').classList.add('active');
+        } else {
+            document.getElementById('customer-btn').classList.add('active');
+        }
+    }
+
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const role = urlParams.get('role');
+        if (role) {
+            setRole(role);
+        }
+    };
+</script>

@@ -1,0 +1,296 @@
+﻿@font-face {
+    font-family: 'BarcodeFont';
+    src: url('/fonts/EAN-13.woff2') format('woff2'), url('/fonts/EAN-13.woff') format('woff'), url('/fonts/EAN-13.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Givonic';
+    src: url('/fonts/Givonic-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cocogoose';
+    src: url('/fonts/Cocogoose-Pro-Semilight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    color: #EC1EA4;
+    display: flex;
+    margin: 0;
+    background-color: #f5f5f5;
+    font-family: 'Givonic', sans-serif;
+}
+
+/* Show dropdown menu on hover */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ec1ea4;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    width: 200px;
+    padding: 0;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.profile-dropdown .dropdown-menu li {
+    list-style: none;
+}
+
+.profile-dropdown .dropdown-menu li a,
+.profile-dropdown .dropdown-menu li button {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px;
+}
+
+.profile-dropdown .dropdown-menu li a:hover,
+.profile-dropdown .dropdown-menu li button:hover {
+    background-color: #d61c95;
+    cursor: pointer;
+}
+
+.dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    background-color: #ec1ea4;
+    color: white;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 80%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: background-color 0.2s ease, border-radius 0.2s ease, padding 0.2s ease;
+}
+
+.sidebar ul li a i {
+    width: 2rem;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #d61c95;
+    border-radius: 2rem;
+    padding: 10px;
+}
+
+/* MAIN CONTENT */
+
+.barcode {
+    font-family: 'BarcodeFont', sans-serif;
+    font-size: 24px;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+/* Form Styling */
+form {
+    display: grid;
+    gap: 8px; 
+    margin-bottom: 10px; 
+}
+
+form input, form textarea, form button {
+    padding: 8px;
+    font-size: 0.9rem; 
+    width: 50%;
+}
+
+#uploadProductBtn {
+    background-color: #EC1EA4;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 8px 16px;
+    font-size: 1rem;
+    width: 15%;
+    margin-top: 10px;
+}
+
+#uploadProductBtn:hover {
+    background-color: #d51a8b;
+}
+
+/* Table Styling */
+.barcode {
+    font-family: 'BarcodeFont', sans-serif;
+    color: black;
+}
+
+.description-scroll {
+    max-height: 100px;
+    overflow-y: auto; 
+    font-size: 0.9rem; 
+    line-height: 1.3;
+    padding: 5px; 
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #EC1EA4;
+    color: #EC1EA4;
+    padding: 6px;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+td img {
+    display: block;
+    margin: 0 auto;
+}
+
+table td:nth-child(8) {
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table td:nth-child(3) {
+    width: 10%;
+    overflow: hidden;
+}
+
+.btn-update {
+    background-color: #ec1ea4;
+    color: white;
+    text-decoration: none;
+    width: 50%;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 10px;
+}
+
+.btn-update:hover {
+    background-color: #d51a8b; 
+}
+
+.btn-delete {
+    background-color: #ec1ea4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    width: 50%;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+    .btn-delete:hover {
+        background-color: #d51a8b;
+    }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 15px;
+    border: 1px solid #ec1ea4;
+    width: 60%;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-btn {
+    background-color: #ec1ea4;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    width: 20%;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.modal-btn:hover {
+    background-color: #d51a8b;
+}

@@ -1,0 +1,120 @@
+﻿@font-face {
+    font-family: 'Givonic';
+    src: url('/fonts/Givonic-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Cocogoose';
+    src: url('/fonts/Cocogoose-Pro-Semilight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    background-color: #f5f5f5;
+    font-family: 'Givonic', sans-serif;
+}
+
+/* Show dropdown menu on hover */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ec1ea4;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    width: 200px;
+    padding: 0;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.profile-dropdown .dropdown-menu li {
+    list-style: none;
+}
+
+.profile-dropdown .dropdown-menu li a,
+.profile-dropdown .dropdown-menu li button {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px;
+}
+
+.profile-dropdown .dropdown-menu li a:hover,
+.profile-dropdown .dropdown-menu li button:hover {
+    background-color: #d61c95;
+    cursor: pointer;
+}
+
+.dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    background-color: #ec1ea4;
+    color: white;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 80%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: background-color 0.2s ease, border-radius 0.2s ease, padding 0.2s ease;
+}
+
+.sidebar ul li a i {
+    width: 2rem;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #d61c95;
+    border-radius: 2rem;
+    padding: 10px;
+}
+
+/* main content */

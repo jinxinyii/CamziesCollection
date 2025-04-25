@@ -1,0 +1,145 @@
+﻿@page
+@model CapstoneCC.Pages.SkincareModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiforgery
+@{
+    Layout = null;
+    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Skincare Products";
+    var antiforgeryToken = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camzie's Collections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/skincare.css" />
+
+</head>
+<body>
+    <div class="sidebar">
+        <img src="~/images/WHITE_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" style="width: 70%; display: block; margin: 0 auto 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            @if (User.IsInRole("customer") || User.IsInRole("reseller"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/AddToCart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+            }
+            @if (User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/POS"><i class="fas fa-cash-register"></i> Point-of-Sale</a>
+                </li>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Orders"><i class="fas fa-clipboard-list"></i> Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Sales"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Staff"><i class="fas fa-user"></i> Staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                </li>
+            }
+            <li class="nav-item">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+    <!-- PRODUCTS -->
+    <div class="content">
+    <div class="product-container">
+            @if (Model.Products != null && Model.Products.Any())
+            {
+                @foreach (var product in Model.Products)
+                {
+                    <div class="product-card"
+                         onclick="openProductModal('@product.Name',
+                               '@product.Description',
+                               '@product.Price',
+                               '@product.ImagePath',
+                               '@product.Discount',
+                               '@product.Id')"
+                         style="cursor: pointer;">
+                        @if (!string.IsNullOrEmpty(product.Badge))
+                        {
+                            <div class="badge">@product.Badge</div>
+                        }
+                        <img src="@product.ImagePath" alt="@product.Name" class="product-image" />
+                        @if (product.Discount > 0)
+                        {
+                            <div class="discount">-@product.Discount%</div>
+                        }
+                        <div class="title">@product.Name</div>
+                        <div class="description">@product.Description</div>
+                        <div class="price">₱@product.Price</div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No skincare products available.</p>
+            }
+            <!-- Modal HTML -->
+            <div id="productModal" class="custom-modal">
+                <div class="custom-modal-content">
+                    <span class="custom-close" onclick="closeModal()">&times;</span>
+                    <h3 id="modalTitle"></h3>
+                    <img id="modalImage" src="" alt="Product Image" class="product-image-modal" />
+
+                    <!-- Description -->
+                    <div class="description" id="modalDescription"></div>
+
+                    <!-- Price, Discount, and Total -->
+                    <div class="price-section">
+                        <h4 id="modalPrice"></h4>
+                        <h4 id="modalDiscount" class="text-danger"></h4>
+                        <h5 id="finalPrice" class="text-success"></h5>
+                    </div>
+                    
+                    <!-- Add To Cart -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-page-handler="AddToCart">
+                            <input type="hidden" name="ProductId" id="ProductId" />
+                            <input type="hidden" name="DiscountedPrice" id="DiscountedPrice" />
+
+                            <div class="quantity-section">
+                                <label for="quantity" class="quantity-label">Quantity:</label>
+                                <input type="number" name="Quantity" id="quantity" value="1" min="1" />
+                            </div>
+
+                            <button type="submit" class="custom-btn primary">Add to Cart</button>
+                            <button type="button" class="custom-btn secondary" onclick="closeModal()">Close</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-primary" onclick="redirectToLogin()">Add to Cart</button>
+                    }
+                    
+                </div>
+            </div>
+    </div>
+    </div>
+    <script src="~/js/skincare.js" asp-append-version="true"></script>
+</body>

@@ -1,0 +1,115 @@
+﻿@page
+@model CapstoneCC.Pages.HomeModel
+@{
+    Layout = null;
+    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Home";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camzie's Collections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/home.css" />
+</head>
+<body>
+    <div class="sidebar">
+        <img src="~/images/WHITE_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" style="width: 70%; display: block; margin: 0 auto 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            @if (User.IsInRole("customer") || User.IsInRole("reseller"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/AddToCart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+            }
+            @if (User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/POS"><i class="fas fa-cash-register"></i> Point-of-Sale</a>
+                </li>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Orders"><i class="fas fa-clipboard-list"></i> Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Sales"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Staff"><i class="fas fa-user"></i> Staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                </li>
+            }
+            <li class="nav-item">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="product-section">
+            <h2>OUR PRODUCT</h2>
+            <div class="brands">
+                <span>Brand</span>
+                <span>Brand</span>
+                <span>Brand</span>
+                <span>Brand</span>
+                <span>Brand</span>
+            </div>
+            <div class="products">
+                <div class="product-card">
+                    <a href="~/Skincare">
+                        <img src="/images/index/skincare.jpg" alt="Skincare products">
+                    </a>
+                    <h3>Skincare Products</h3>
+                    <p>
+                        ✨ Glow up your skin, naturally! ✨
+                        <br />
+                        Say goodbye to dull, tired skin and hello to a radiant, healthy glow. Our skincare products are crafted to cleanse, hydrate, and nourish your skin. Whether you're looking to fight acne, reduce signs of aging, or achieve that fresh, dewy look – we’ve got you covered.
+                    </p>
+                </div>
+                <div class="product-card">
+                    <a href="~/Skincare">
+                        <img src="/images/index/makeup.jpg" alt="Makeup products">
+                    </a>  
+                    <h3>Makeup Products</h3>
+                    <p>
+                        💄 Elevate your style. Embrace your beauty. 💄
+                        <br />
+                        From soft, natural finishes to bold, glamorous styles – our makeup products are your secret to turning heads. Enhance your natural beauty and express yourself effortlessly.
+                    </p>
+                </div>
+                <div class="product-card">
+                    <a href="~/Skincare">
+                        <img src="/images/index/bodycare.jpg" alt="Body care products">
+                    </a>
+                    <h3>Body Care Products</h3>
+                    <p>
+                        🧴 Your body deserves the best. 🌸
+                        <br />
+                        Give your skin the ultimate care it craves with our luxurious body care products. Indulge in soft, smooth, and beautifully scented skin every day.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/home.js" asp-append-version="true"></script>
+</body>
+</html>

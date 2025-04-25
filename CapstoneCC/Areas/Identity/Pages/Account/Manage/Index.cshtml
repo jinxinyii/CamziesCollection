@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+    
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+    <form method="post" class="profile-form">
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Username" class="form-control" aria-required="true" placeholder="Username" />
+            <label asp-for="Input.Username" class="form-label"></label>
+            <span asp-validation-for="Input.Username" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="Email" />
+            <label asp-for="Input.Email" class="form-label"></label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="PhoneNumber" />
+            <label asp-for="Input.PhoneNumber" class="form-label"></label>
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Address" class="form-control" aria-required="true" placeholder="Address" />
+            <label asp-for="Input.Address" class="form-label"></label>
+            <span asp-validation-for="Input.Address" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn custom-btn">Save Changes</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

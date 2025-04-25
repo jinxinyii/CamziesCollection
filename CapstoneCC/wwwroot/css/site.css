@@ -1,0 +1,298 @@
+@font-face {
+     font-family: 'Givonic';
+     src: url('/fonts/Givonic-Regular.otf') format('opentype');
+     font-weight: normal;
+     font-style: normal;
+}
+ @media (min-width: 768px) {
+     html {
+         font-size: 12px;
+    }
+}
+ .btn:focus, .btn:active:focus, .btn-link.nav-link:focus {
+     color: #F5F5F5;
+     background-color: #EC1EA4;
+     border-color: #EC1EA4;
+     box-shadow: 0 0 0 0.1rem 
+}
+ html {
+     position: relative;
+     min-height: 100%;
+     font-size: 14px;
+}
+ body {
+     font-family: 'Givonic', sans-serif;
+     background-color: #F5F5F5;
+}
+ .form-check-input:focus, .form-check-input:checked {
+     background-color: #EC1EA4;
+     border-color: #EC1EA4;
+     box-shadow: 0 0 0 0.1rem 
+}
+/* LOGO */
+ .navbar-logo {
+     max-height: 40px;
+     height: 100%;
+     width: auto;
+}
+ .navbar-nav {
+     display: flex;
+     justify-content: space-between;
+     max-width: 1200px;
+}
+/* LOGO */
+/* navbar color */
+ .custom-navbar {
+     background-color: #EC1EA4;
+}
+/* navbar color */
+/* button color in index */
+ .custom-btn-outline-primary {
+     color: #795548;
+     background-color: #E7D7C9;
+}
+ .custom-btn-outline-primary:hover {
+     color: #795548;
+     background-color: #C09672;
+}
+/* button color in index */
+/* register css */
+ .role-buttons .role-btn {
+     flex: 1;
+     background-color: #EC1EA4;
+     color: #F5F5F5;
+     border: none;
+     padding: 10px;
+     cursor: pointer;
+     transition: background-color 0.25s ease;
+     border-radius: 4px;
+     margin: 0 5px;
+}
+ .role-buttons .role-btn:hover {
+     background-color: #C71585;
+}
+ .role-buttons .role-btn.active {
+     background-color: #F265C1;
+}
+ .btn-outline-primary {
+     border: 2px solid;
+     border-color: #EC1EA4;
+     background-color: #EC1EA4;
+     color: #F5F5F5;
+}
+ .btn-outline-primary:hover {
+     border: 2px solid;
+     border-color: #EC1EA4;
+     background-color: #F5F5F5;
+     color: #EC1EA4;
+}
+ custom-label-h2 {
+     color: #EC1EA4;
+}
+ .custom-label {
+     color: #EC1EA4;
+}
+ .form-control {
+     border: 2px solid;
+     border-color: #EC1EA4;
+     background-color: #F5F5F5;
+}
+ .form-control:focus {
+     border-color: #F5F5F5;
+     background-color: #F5F5F5;
+     box-shadow: 0 0 0 0.2rem rgba(245, 40, 145, 0.8);
+}
+ .custom-container {
+     margin: auto;
+     padding: 0.5rem;
+     background-color: #F5F5F5;
+     border: 3.5px solid #EC1EA4;
+     border-radius: 1.5rem;
+}
+ .custom-container.shadow {
+     box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+}
+/* register css */
+/* login css */
+/* the border and button is the same class with register btn and border */
+ .form-label {
+     color: #EC1EA4;
+}
+ .btn-link {
+     color: #EC1EA4;
+     outline: none;
+}
+ .btn-link:hover, .btn-link:active {
+     color: #EC1EA4;
+     box-shadow: none;
+}
+ .forgotpassword {
+     color: #EC1EA4;
+     margin: 2px;
+}
+ .forgotpassword:hover, .forgotpassword:active {
+     color: #C71585;
+}
+/* login css */
+/* dropdown loginPartial */
+.nav-link.dropdown-toggle::after {
+    border-top-color: #F5F5F5;
+}
+.username {
+    color: #F5F5F5;
+}
+ .nav-item.dropdown:hover .dropdown-menu {
+     display: block;
+     opacity: 1;
+     visibility: visible;
+     transform: translateY(0);
+     background-color: #EC1EA4;
+     color: #F5F5F5;
+}
+ .nav-item .dropdown-menu {
+     display: none;
+     opacity: 0;
+     visibility: hidden;
+     position: absolute;
+     transform: translateY(-10px);
+     transition: all 0.3s ease;
+     margin: 0;
+     padding: 0;
+     width: 10rem;
+}
+ .nav-item .dropdown-item:hover {
+     background-color: #F5F5F5;
+     color: #EC1EA4;
+     padding: 15px 20px;
+     transition: background-color 0.3s ease;
+     margin: 0;
+     width: 100%;
+}
+ .dropdown-menu .dropdown-item {
+     display: block;
+     padding: 15px 20px;
+     background-color: #EC1EA4;
+     color: #F5F5F5;
+     border-radius: 0px;
+     margin: 0;
+     border: none;
+}
+ .dropdown-divider {
+     border-color: #F5F5F5;
+     opacity: 0.5;
+     margin: 0;
+}
+/* dropdown loginPartial */
+/* ABOUT PRIVACY SOCIALS Section */
+ .socials-section {
+     padding: 40px;
+}
+ .content-wrapper {
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-start;
+}
+ .text-section {
+     width: 60%;
+}
+ .text-section h2 {
+     color: #EC1EA4;
+     font-size: 28px;
+     font-weight: bold;
+}
+ .text-section .description {
+     font-size: 16px;
+     margin: 20px 0;
+}
+ .social-links a {
+     text-transform: uppercase;
+     font-weight: bold;
+     color: #EC1EA4;
+     text-decoration: none;
+     margin-right: 15px;
+}
+ .social-links a:hover {
+     text-decoration: underline;
+}
+ .image-section {
+     width: 29%;
+    /* Adjust width as necessary */
+}
+ .image-section img {
+     max-width: 100%;
+     height: auto;
+     border-radius: 8px;
+}
+/* ABOUT PRIVACY SOCIALS Section */
+/*FORGOT PASSWORD*/
+ .forgot-password-container {
+     max-width: 450px;
+     margin: auto;
+     padding: 30px;
+     border: 3.5px solid #EC1EA4;
+     border-radius: 1.5rem;
+     background-color: #F5F5F5;
+}
+ .forgot-password-form .form-control {
+     border: 2px solid #EC1EA4;
+     border-radius: 4px;
+     background-color: #F5F5F5;
+}
+ .forgot-password-form .form-control:focus {
+     border-color: #EC1EA4;
+     box-shadow: 0 0 0 0.2rem rgba(245, 40, 145, 0.8);
+}
+ .custom-btn {
+     background-color: #EC1EA4;
+     color: #F5F5F5;
+     border: 2px solid #EC1EA4;
+     border-radius: 10px;
+     width: 47%;
+     text-align: center;
+}
+ .custom-btn:hover {
+     background-color: #F5F5F5;
+     color: #EC1EA4;
+}
+ #forgot-password, .forgotPassword {
+     color: #EC1EA4;
+     text-decoration: none;
+     transition: color 0.3s;
+}
+ #forgot-password:hover, .forgotPassword:hover {
+     color: #C71585;
+     text-decoration: underline;
+}
+ #forgot-password:active, .forgotPassword:active {
+     color: #C71585;
+}
+/*FORGOT PASSWORD*/
+/*2FA*/
+.two-factor-auth-container {
+    max-width: 600px;
+    color: #EC1EA4;
+}
+ .two-factor-title {
+     color: #EC1EA4;
+     font-weight: bold;
+}
+ .two-factor-description {
+     margin-bottom: 20px;
+}
+
+.btn-secondary {
+    margin: 5px;
+    background-color: #EC1EA4;
+    color: #F5F5F5;
+    border: 2px solid #EC1EA4;
+    border-radius: 10px;
+    width: 47%;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #F5F5F5;
+    color: #EC1EA4;
+    border-color: #EC1EA4;
+}
+/*2FA*/

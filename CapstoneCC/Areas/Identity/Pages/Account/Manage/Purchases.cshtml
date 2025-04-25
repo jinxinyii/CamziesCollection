@@ -1,0 +1,72 @@
+﻿@page
+@model CapstoneCC.Areas.Identity.Pages.Account.Manage.PurchasesModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camzie's Collections</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/purchases.css" />
+</head>
+<body>
+    <div class="sidebar">
+        <img src="~/images/WHITE_TRANSPARENT_LOGO.png" alt="Camzie's Collections Logo" style="width: 70%; display: block; margin: 0 auto 20px;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home"><i class="fas fa-home"></i> Home</a>
+            </li>
+            @if (User.IsInRole("staff") || User.IsInRole("reseller") || User.IsInRole("customer"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/AddToCart"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+            }
+            @if (User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/POS"><i class="fas fa-cash-register"></i> Point-of-Sale</a>
+                </li>
+            }
+            @if (User.IsInRole("admin") || User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Orders"><i class="fas fa-clipboard-list"></i> Orders</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Sales"><i class="fas fa-dollar-sign"></i> Sales</a>
+                </li>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Inventory"><i class="fas fa-warehouse"></i> Inventory</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Staff"><i class="fas fa-user"></i> Staff</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                </li>
+            }
+            <li class="nav-item">
+                <partial name="_LoginPartial" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+    </div>
+    <script src="~/js/purchases.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Camzie's Collection";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/startup.css" />
+
+</head>
+<body>
+    <div class="left-section">
+        <nav>
+            <a asp-page="/About">About</a>
+            <a asp-area="Identity" asp-page="/Account/Register" asp-route-role="reseller">Start Selling</a>
+            <a asp-page="/Socials">Socials</a>
+        </nav>
+        <h1>CAMZIE'S</h1>
+        <h2>COLLECTIONS</h2>
+        <div class="buttons">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-page="/Home" class="btn-primary-link">CONTINUE</a>
+            }
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn-primary-link">SIGN UP</a>
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn-primary-link">LOG IN</a>
+            }
+        </div>
+    </div>
+    <div class="right-section">
+        <h2>OUR PRODUCT</h2>
+        <div class="brands">
+            <a href="#">Brand</a>
+            <a href="#">Brand</a>
+            <a href="#">Brand</a>
+            <a href="#">Brand</a>
+            <a href="#">Brand</a>
+        </div>
+        <div class="product-image">
+            <a href="~/Skincare">
+                <img id="productImage" alt="product" src="/images/homepage_picture/homepage_picture_1.jpg" />
+            </a>
+        </div>
+        <div class="dots">
+            <i class="fas fa-circle" onclick="changeImage(0)"></i>
+            <i class="far fa-circle" onclick="changeImage(1)"></i>
+            <i class="far fa-circle" onclick="changeImage(2)"></i>
+        </div>
+    </div>
+    <script src="~/js/startup.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿.btn-secondary {
+    margin: 5px;
+    background-color: #EC1EA4;
+    color: #F5F5F5;
+    border: 2px solid #EC1EA4;
+    border-radius: 10px;
+    width: 47%;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #F5F5F5;
+    color: #EC1EA4;
+    border-color: #EC1EA4;
+}

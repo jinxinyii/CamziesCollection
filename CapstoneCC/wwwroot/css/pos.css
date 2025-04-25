@@ -1,0 +1,388 @@
+﻿@font-face {
+    font-family: 'BarcodeFont';
+    src: url('/fonts/EAN-13.woff2') format('woff2'), url('/fonts/EAN-13.woff') format('woff'), url('/fonts/EAN-13.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Givonic';
+    src: url('/fonts/Givonic-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cocogoose';
+    src: url('/fonts/Cocogoose-Pro-Semilight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 10px;
+    }
+
+    .modal-content {
+        width: auto;
+    }
+
+    #receiptContent {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px;
+        text-align: center;
+        margin-left: 10%;
+        margin-right: 30%; 
+        width: 100%; 
+    }
+
+    #receiptContent h3 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    #receiptContent table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        font-size: 18px;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: #f5f5f5;
+    font-family: 'Givonic', sans-serif;
+    color: black;
+}
+/* clock */
+#clock-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Givonic', sans-serif;
+    font-size: 14px;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #ec1ea4;
+    background-color: #fff;
+    width: 200px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Show dropdown menu on hover */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ec1ea4;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    width: 200px;
+    padding: 0;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.profile-dropdown .dropdown-menu li {
+    list-style: none;
+}
+
+.profile-dropdown .dropdown-menu li a,
+.profile-dropdown .dropdown-menu li button {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px;
+}
+
+.profile-dropdown .dropdown-menu li a:hover,
+.profile-dropdown .dropdown-menu li button:hover {
+    background-color: #d61c95;
+    cursor: pointer;
+}
+
+.dropdown-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px;
+    background-color: #ec1ea4;
+    color: white;
+    position: fixed;
+    height: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 80%;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: background-color 0.2s ease, border-radius 0.2s ease, padding 0.2s ease;
+}
+
+.sidebar ul li a i {
+    width: 2rem;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #d61c95;
+    border-radius: 2rem;
+    padding: 10px;
+}
+
+/*MAIN CONTENT*/
+.barcode {
+    font-family: 'BarcodeFont', sans-serif;
+    font-size: 50px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 19rem); 
+    overflow-x: hidden;
+}
+
+#barcodeInput {
+    font-size: 18px; 
+    padding: 12px 16px; 
+    width: 100%; 
+    border-radius: 5px;
+    border: 1px solid #ddd; 
+    margin-bottom: 20px;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box; 
+}
+
+#barcodeInput:focus {
+    outline: none; 
+    border-color: #ec1ea4;
+    box-shadow: 0 0 5px rgba(236, 30, 164, 0.3);
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table th, table td {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #fff;
+}
+
+table tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+/* Card-style for product listing */
+.product-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.product-card .product-info {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.product-card .product-info h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.product-card .product-info p {
+    font-size: 14px;
+    color: #777;
+}
+
+.product-card .actions button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-card .actions button:hover {
+    background-color: #d61c95;
+}
+
+/* Search bar */
+.suggestions {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.suggestions div {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0;
+}
+
+/* Scroll bar */
+.cart-table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+#cartTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cartTable th, #cartTable td {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+/* Grand total styling */
+#grandTotal {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Checkout button styling */
+button {
+    background-color: #ec1ea4;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 12px;
+}
+
+button:hover {
+    background-color: #d61c95;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#receiptContent th, #receiptContent td {
+    background-color: transparent;
+}

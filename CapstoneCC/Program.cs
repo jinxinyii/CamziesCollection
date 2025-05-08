@@ -26,7 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
     options.UseSqlServer(connectionString);
 });
-
+    
 builder.Services.AddSingleton<PayPalService>();
 builder.Services.AddControllers().AddNewtonsoftJson();
 

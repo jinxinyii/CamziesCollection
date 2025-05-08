@@ -133,16 +133,16 @@ body {
 
 /* Style for tables */
 table {
-    width: 100%; /* Ensure the table spans the full width */
+    width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
 table th, table td {
-    padding: 10px 15px; /* Add consistent padding */
+    padding: 10px 15px; 
     border: 1px solid #ddd;
-    text-align: center; /* Center-align text for better readability */
-    vertical-align: middle; /* Align content vertically in the middle */
+    text-align: center; 
+    vertical-align: middle; 
 }
 
 table th {
@@ -153,7 +153,7 @@ table th {
 
 table td {
     background-color: #f9f9f9;
-    word-wrap: break-word; /* Ensure long text wraps within the cell */
+    word-wrap: break-word;
 }
 
 /* Products section with a scrollbar */
@@ -191,13 +191,13 @@ form button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column; /* Arrange buttons vertically */
-    gap: 10px; /* Space between buttons */
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Optional: Adjust the buttons' width if necessary */
 form button {
-    width: 200px; /* Adjust the width as needed */
+    width: 200px;
 }
 
 /* Scrollbar styling for table and product list */

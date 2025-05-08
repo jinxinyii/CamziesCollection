@@ -1,7 +1,6 @@
 using CapstoneCC.Models;
-using DinkToPdf;
-using DinkToPdf.Contracts;
 using CapstoneCC.Services;
+using DinkToPdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -31,28 +30,51 @@ namespace CapstoneCC.Pages
         }
         public async Task<IActionResult> OnGetDownloadPdf()
         {
+            // Load the libwkhtmltox.dll
+            var context = new CustomAssemblyLoadContext();
+            context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/lib/libwkhtmltox.dll"));
+
             // Ensure that Transactions are populated
             if (Transactions == null || !Transactions.Any())
             {
-                // Fetch the Transactions if they are not available
                 Transactions = await _context.SalesTransactions
                     .OrderByDescending(t => t.TransactionDate)
                     .ToListAsync();
             }
 
-            // Check if Transactions is still empty after the fetch
             if (Transactions == null || !Transactions.Any())
             {
                 return NotFound("No sales transactions available.");
             }
 
-            // PDF generation using DinkToPdf
             var converter = new SynchronizedConverter(new PdfTools());
 
             // Build the HTML for the PDF
             string htmlContent = @"
-            <h1>Sales Transactions</h1>
-            <table border='1'>
+            <style>
+                table {
+                    border-collapse: collapse;
+                    width: 80%;
+                    text-align: center;
+                    margin: 0 auto;
+                    page-break-inside: avoid;
+                }
+                th, td {
+                    border: 1px solid #000;
+                    padding: 4px 8px;
+                }
+                thead {
+                    display: table-header-group;
+                }
+                tr {
+                    page-break-inside: avoid;
+                    page-break-after: auto;
+                }
+            </style>
+            <div style='text-align: center;'>
+                <h1>Sales Transactions</h1>
+            </div>
+            <table>
                 <thead>
                     <tr>
                         <th>Transaction ID</th>
@@ -63,24 +85,21 @@ namespace CapstoneCC.Pages
                     </tr>
                 </thead>
                 <tbody>";
+                        foreach (var transaction in Transactions)
+                        {
+                            htmlContent += $@"
+                    <tr>
+                        <td>{transaction.TransactionId}</td>
+                        <td>{transaction.TransactionDate:yyyy-MM-dd}</td>
+                        <td>{transaction.TransactionDate:HH:mm:ss}</td>
+                        <td>{transaction.CashierName}</td>
+                        <td>{transaction.Amount}</td>
+                    </tr>";
+                        }
+                        htmlContent += @"
+                </tbody>
+            </table>";
 
-            foreach (var transaction in Transactions)
-            {
-                htmlContent += $@"
-            <tr>
-                <td>{transaction.TransactionId}</td>
-                <td>{transaction.TransactionDate:yyyy-MM-dd}</td>
-                <td>{transaction.TransactionDate:HH:mm:ss}</td>
-                <td>{transaction.CashierName}</td>
-                <td>{transaction.Amount}</td>
-            </tr>";
-            }
-
-            htmlContent += @"
-            </tbody>
-        </table>";
-
-            // Configure PDF settings
             var pdfDocument = new HtmlToPdfDocument()
             {
                 GlobalSettings = new GlobalSettings
@@ -92,10 +111,8 @@ namespace CapstoneCC.Pages
                 Objects = { new ObjectSettings { HtmlContent = htmlContent } }
             };
 
-            // Convert HTML to PDF
             var pdfBytes = converter.Convert(pdfDocument);
 
-            // Return the PDF file
             return File(pdfBytes, "application/pdf", "SalesReport.pdf");
         }
     }

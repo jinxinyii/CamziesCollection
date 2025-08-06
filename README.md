@@ -47,3 +47,27 @@ We would like to express our heartfelt gratitude to **Camzies Collection** for a
 ## Contact
 
 If you have any questions or feedback, feel free to reach out to us.
+
+## Local Setup Guide
+
+For the best experience, we recommend using **Visual Studio 2022**.
+
+1. **Install Visual Studio 2022** (Community Edition is sufficient).
+2. Ensure the following workloads are installed:
+   - ASP.NET and web development
+   - .NET desktop development
+   - Data storage and processing (for SQL Server support)
+3. **Clone the repository**:
+   ```sh
+   git clone https://github.com/yourusername/CapstoneCC.git
+   ```
+4. **Open the solution**: Double-click `CapstoneCC.sln` or open it from Visual Studio 2022.
+5. **Restore NuGet packages**: Visual Studio will prompt you or restore automatically.
+6. **Set up the database**:
+   - Make sure SQL Server is running locally.
+   - Update the connection string in `appsettings.json` if needed.
+   - Apply migrations using the Package Manager Console:
+     ```sh
+     Update-Database
+     ```
+7. **Run the application**: Press F5 or click "Start" to launch with debugging.
